@@ -294,3 +294,5 @@ document.getElementById("startScanner").addEventListener("click", function () {
     resultContainer.innerHTML = ""; // Clear previous results
     startQRScanner();
 });
+
+

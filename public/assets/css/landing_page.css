@@ -1248,3 +1248,90 @@ footer {
         transform: translateY(20px);
     }
 }
+
+
+
+
+/* New */
+
+.carousel-section {
+            position: relative;
+            margin: 3rem 68px;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: linear-gradient(135deg, #0a4d2e 0%, #0d6e42 100%);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(10, 77, 46, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, #0d6e42 0%, #0a4d2e 100%);
+            box-shadow: 0 6px 20px rgba(10, 77, 46, 0.5);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: -25px;
+        }
+
+        .next-btn {
+            right: -25px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            color: #0a4d2e;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0a4d2e 0%, #0d6e42 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 8px 25px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0d6e42 0%, #0a4d2e 100%);
+            transform: scale(1.05);
+        }
+
+        .carousel-inner {
+            padding: 20px 0;
+        }
