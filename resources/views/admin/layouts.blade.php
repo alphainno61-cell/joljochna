@@ -10,8 +10,19 @@
    
 </head>
 <body>
-   
-    @yield('content')
+     <div class="dashboard">
+
+        @include('admin.sidebar')
+
+     <main class="main-content">
+
+        @include('admin.header')
+
+        @yield('content')
+        
+    </main>
+    <div>
+  
 
 
     <!-- Custom Modal/Message Box (for alerts/confirmations) -->

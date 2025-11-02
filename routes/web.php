@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('landing');
-});
 
-Route::get('/dashboard',function(){
-    return view('admin.dashboard');
-});
+Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 
-Route::get('/slider1',function(){
-    return view('slider1');
-});
+Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
+
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+
+
+
 
 
 

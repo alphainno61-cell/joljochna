@@ -225,7 +225,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         document.querySelectorAll('.plot').forEach(plot => {
             plot.addEventListener('click', function() {
@@ -237,7 +237,7 @@
 
 
 <style>
-      
+    
         .main-container {
             max-width: 100%;
             margin: 0 auto;
@@ -343,6 +343,7 @@
             border: 3px solid #000;
             padding: 5px;
         }
+        
         .block-title {
             background: #fff;
             border: 2px solid #000;
