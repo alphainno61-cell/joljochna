@@ -11,9 +11,16 @@
 </head>
 
 <body>
-   
+    {{-- Header --}}
+   @include('landingSection.header')
+
+
+   {{-- Content Area --}}
     @yield('content')
 
+
+    {{-- Footer --}}
+   @include('landingSection.footer')
 
 
     <script>
