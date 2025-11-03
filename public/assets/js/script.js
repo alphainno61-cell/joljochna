@@ -24,45 +24,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Form submission
-document.querySelector("form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    // Custom message box for feedback
-    showNotification("ধন্যবাদ! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।");
-    e.target.reset(); // Reset form after successful submission
-});
 
-function showNotification(message) {
-    // Create a simple modal/notification box for feedback
-    const notification = document.createElement("div");
-    notification.style.position = "fixed";
-    notification.style.top = "50%";
-    notification.style.left = "50%";
-    notification.style.transform = "translate(-50%, -50%)";
-    notification.style.padding = "20px 40px";
-    notification.style.backgroundColor = "#ffd700";
-    notification.style.color = "#0a4d2e";
-    notification.style.borderRadius = "10px";
-    notification.style.zIndex = "9999";
-    notification.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
-    notification.style.fontSize = "1.2rem";
-    notification.style.opacity = "0";
-    notification.style.transition = "opacity 0.5s ease-in-out";
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.style.opacity = "1";
-    }, 10);
-
-    setTimeout(() => {
-        notification.style.opacity = "0";
-        notification.addEventListener("transitionend", () => {
-            notification.remove();
-        });
-    }, 3000);
-}
 
 // --- CAROUSEL LOGIC ---
 // Refactored to handle multiple carousels

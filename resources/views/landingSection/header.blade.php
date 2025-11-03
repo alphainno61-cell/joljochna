@@ -1,7 +1,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="#home">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <i class="fas fa-home me-2 text-warning"></i>
                 <span class="brand-text">জলজোছনা</span>
             </a>
@@ -15,10 +15,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">হোম</a>
+                        <a class="nav-link" href="{{ route('home') }}">হোম</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about">আমাদের সম্পর্কে</a>
+                        <a class="nav-link" href="{{ route('about') }}">আমাদের সম্পর্কে</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#features">সুবিধা</a>
@@ -30,7 +30,7 @@
                         <a class="nav-link" href="/#testimonials">মন্তব্য</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#other-projects">অন্যান্য প্রকল্প</a>
+                        <a class="nav-link" href="{{ route('projects') }}">অন্যান্য প্রকল্প</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#contact">যোগাযোগ</a>
