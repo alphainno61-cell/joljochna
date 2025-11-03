@@ -14,6 +14,10 @@ class HomeController extends Controller
          return view('pages.about');
     }
 
+    public function othersProjects(){
+         return view('pages.othersProject');
+    }
+
      public function dashboard(){
          return view('admin.dashboard');
     }

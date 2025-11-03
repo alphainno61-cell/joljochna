@@ -6,7 +6,7 @@
 @include('landingSection.priceList')
 @include('landingSection.testimonial')
 @include('landingSection.card')
-@include('landingSection.block')
+@include('landingSection.prokolpoMap')
 @include('landingSection.otherProject')
 @include('landingSection.contact')
 

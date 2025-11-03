@@ -10,7 +10,7 @@ Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
 
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-
+Route::get('/projects',[HomeController::class, 'othersProjects'])->name('projects');
 
 
 

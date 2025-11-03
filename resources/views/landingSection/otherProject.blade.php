@@ -58,6 +58,6 @@
 
         <!-- See More Button Kept -->
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="#contact" class="btn btn-primary">আরও দেখুন</a>
+            <a href="/projects" class="btn btn-primary">আরও দেখুন</a>
         </div>
     </section>
