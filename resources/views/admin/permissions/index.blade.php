@@ -29,8 +29,12 @@
                                     <a href="{{ route('permissions.create') }}" class="btn btn-info">Create New</a>
                                 @endcan
 
+                                @if (Session('error'))
+                                    <span class="me-5 bg-danger text-white p-3">{{ Session('error') }}</span>
+                                @endif
+
                                 @if (Session('success'))
-                                    <span class="me-5 bg-danger text-white p-3">{{ Session('success') }}</span>
+                                    <span class="me-5 bg-success text-white p-3">{{ Session('success') }}</span>
                                 @endif
 
                             </div>

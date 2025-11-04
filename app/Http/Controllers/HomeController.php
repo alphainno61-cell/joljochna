@@ -29,26 +29,26 @@ class HomeController extends Controller
 
      public function booking()
      {
-          return view('admin.booking');
+          return view('admin.booking.booking');
      }
 
      public function plot()
      {
-          return view('admin.plot');
+          return view('admin.plot.plot');
      }
 
      public function customer()
      {
-          return view('admin.customer');
+          return view('admin.customer.customer');
      }
 
      public function report()
      {
-          return view('admin.reports');
+          return view('admin.report.reports');
      }
 
      public function setting()
      {
-          return view('admin.setting');
+          return view('admin.setting.setting');
      }
 }

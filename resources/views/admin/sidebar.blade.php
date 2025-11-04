@@ -12,6 +12,17 @@
 
      <nav class="nav-menu">
 
+
+         <a href="{{ route('home') }}" class="nav-item" data-tab="overview">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+             </svg>
+             <span>হোম</span>
+         </a>
+
+
+
+
          @can('View Dashboard')
              <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}"
                  data-tab="overview">

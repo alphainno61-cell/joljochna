@@ -27,7 +27,6 @@ class RoleController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:roles,name|min:3',
-            // 'permission' => 'required'   
         ]);
 
         if ($validator->passes()) {
@@ -102,11 +101,11 @@ class RoleController extends Controller
 
         // Check if the role is assigned to any users
         if ($role->users()->count() > 0) {
-            return response()->json(['status' => 'error', 'message' => 'You cannot delete this role because it is assigned to users.']);
+            return redirect()->back()->with('error', 'You Cant delete this! It has Roles');
         }
 
         $role->delete();
 
-        return response()->json(['status' => 'success', 'message' => 'Role deleted successfully.']);
+        return redirect()->back()->with('success', 'Deleted Successfully');
     }
 }

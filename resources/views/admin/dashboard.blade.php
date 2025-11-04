@@ -29,7 +29,7 @@
                 <div class="stat-card-content">
                     <div class="stat-info">
                         <h3>মোট আয়</h3>
-                        <div class="value" id="statTotalRevenue">৳0L</div>
+                        <div class="value" id="statTotalRevenue">৳0</div>
                         <div class="subtitle">প্রাপ্ত অর্থ</div>
                     </div>
                     <div class="stat-icon yellow">💰</div>

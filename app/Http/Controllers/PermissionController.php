@@ -203,10 +203,10 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
 
         if (count($permission->roles) > 0) {
-            return redirect()->back()->with('success', 'You Cant delete this! It has Roles');
+            return redirect()->back()->with('error', 'You Cant delete this! It has Roles');
         }
 
         $permission->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Deleted Successfully');
     }
 }

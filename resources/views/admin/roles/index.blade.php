@@ -24,10 +24,18 @@
                     <div class="card">
                         <div class="card-header">
                             {{-- <h4>Create Role</h4> --}}
-                            <div class="card-header-action">
+                            <div class="card-header-action d-flex justify-content-between align-items-center">
                                 @can('Create Role')
                                     <a href="{{ route('roles.create') }}" class="btn btn-info">Create New</a>
                                 @endcan
+
+                                @if (Session('error'))
+                                    <span class="me-5 bg-danger text-white p-3">{{ Session('error') }}</span>
+                                @endif
+
+                                @if (Session('success'))
+                                    <span class="me-5 bg-success text-white p-3">{{ Session('success') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">
