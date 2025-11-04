@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    
+
     public function showLoginForm(Request $request)
     {
         // If already authenticated, redirect to intended / dashboard
@@ -21,10 +21,10 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-  
+
     public function login(Request $request)
     {
-       
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'string'],
@@ -42,11 +42,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             RateLimiter::clear($key);
-            $request->session()->regenerate(); 
+            $request->session()->regenerate();
             return redirect()->intended(route('dashboard'));
         }
 
-        RateLimiter::hit($key, 60); 
+        RateLimiter::hit($key, 60);
 
         throw ValidationException::withMessages([
             'email' => ['The provided credentials do not match our records.'],
@@ -73,6 +73,6 @@ class LoginController extends Controller
     protected function throttleKey(Request $request)
     {
         $email = (string) $request->input('email');
-        return strtolower($email).'|'.$request->ip();
+        return strtolower($email) . '|' . $request->ip();
     }
 }
