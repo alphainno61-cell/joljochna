@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'ড্যাশবোর্ড')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-width: 230px;
+            --header-height: 90px;
+            --primary-green: #1a5f4a;
+            --dark-green: #0d3d2f;
+        }
+
+        * {
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: #f5f5f5;
+        }
+
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--primary-green);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem 1rem;
+            background: var(--dark-green);
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav .nav-item {
+            margin: 0;
+        }
+
+        .sidebar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.875rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-nav .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-nav .nav-link.active {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            border-left-color: white;
+        }
+
+        .sidebar-nav .nav-link i {
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .sidebar-nav .nav-link .ms-auto {
+            margin-left: auto;
+            font-size: 0.875rem;
+            transition: transform 0.2s;
+        }
+
+        .sidebar-nav .nav-link[aria-expanded="true"] .ms-auto {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-nav .collapse .nav-link {
+            padding: 0.75rem 1.5rem 0.75rem 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-nav .collapse .nav-link i {
+            font-size: 0.95rem;
+        }
+
+        .sidebar-logout {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logout button {
+            color: #ef4444;
+            background: none;
+            border: none;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease;
+            width: 100%;
+        }
+
+        .header {
+            min-height: var(--header-height);
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .content-area {
+            padding: 2rem;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-content h6 {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .stat-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .stat-icon.blue {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .stat-icon.green {
+            background: #10b981;
+            color: white;
+        }
+
+        .stat-icon.orange {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .stat-icon.purple {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-card h5 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .overlay.show {
+                display: block;
+            }
+        }
+    </style>
+    @stack('styles')
+</head>
+
+<body>
+    <div class="wrapper">
+        @include('admin.layouts.sidebar')
+
+        <div class="main-content">
+            @include('admin.layouts.header')
+
+            <div class="content-area">
+                @yield('content')
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('overlay');
+        const toggleBtns = document.querySelectorAll('#sidebarToggle');
+
+        // Handle both toggle buttons (header and sidebar)
+        toggleBtns.forEach(btn => {
+            btn?.addEventListener('click', (e) => {
+                e.preventDefault();
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            });
+        });
+
+        overlay?.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    </script>
+    @stack('scripts')
+</body>
+
+</html>

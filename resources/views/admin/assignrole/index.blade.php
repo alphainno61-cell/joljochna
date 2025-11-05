@@ -1,4 +1,4 @@
-@extends('admin.layouts')
+@extends('admin.layouts.layout')
 
 @section('content')
     <style>
@@ -19,11 +19,19 @@
                     <div class="card">
                         <div class="card-header">
                             {{-- <h4>Assign Role</h4> --}}
-                            <div class="card-header-action">
+                            <div class="card-header-action d-flex justify-content-between align-items-center">
 
                                 @can('Create AssignRole')
                                     <a href="{{ route('users.create') }}" class="btn btn-info">Create New</a>
                                 @endcan
+
+                                @if (Session('error'))
+                                    <span class="me-5 bg-danger text-white p-3">{{ Session('error') }}</span>
+                                @endif
+
+                                @if (Session('success'))
+                                    <span class="me-5 bg-success text-white p-3">{{ Session('success') }}</span>
+                                @endif
 
                             </div>
                         </div>
@@ -50,8 +58,6 @@
                                         <tr>
                                             <td><span>{{ $user->name }}</span></td>
                                             <td><span>{{ $user->email }}</span></td>
-
-
                                             <td><span>{{ $user->roles->pluck('name')->implode(',') }}</span></td>
                                             <td><span>{{ \Carbon\Carbon::parse($user->created_at)->format('d M, Y') }}</span>
                                             </td>

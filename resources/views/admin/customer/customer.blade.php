@@ -1,4 +1,4 @@
-@extends('admin.layouts')
+@extends('admin.layouts.layout')
 
 @section('content')
     <div id="customers" class="tab-content">

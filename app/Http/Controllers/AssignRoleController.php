@@ -66,19 +66,6 @@ class AssignRoleController extends Controller
     }
 
 
-    // public function update(Request $request, string $id)
-    // {
-    //     $request->validate([
-    //        'role' => ['required', 'exists:roles,name']
-    //     ]);
-
-    //     $user = User::findOrFail($id);
-
-    //     $user->syncRoles([$request->role]);
-
-    //     return redirect()->route('users');
-    // }
-
 
     public function update(Request $request, string $id)
     {
@@ -98,8 +85,14 @@ class AssignRoleController extends Controller
 
     public function destroy(string $id)
     {
-        $role = User::findOrFail($id);
-        $role->delete();
-        return response()->json(['status' => 'success', 'message' => 'Role Permission Deleted Successfully']);
+        $user = User::findOrFail($id);
+
+        if ($user->hasRole('Super Admin')) {
+            return redirect()->back()->with("error", "Super Admin can't be deleted");
+        }
+
+        $user->delete();
+
+        return redirect()->back()->with("success", "Role Permission Deleted Successfully");
     }
 }

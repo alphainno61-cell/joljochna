@@ -18,6 +18,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
+
+    Route::get('/form', [HomeController::class, 'form'])->name('form');
+
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('permission:View Dashboard');
     Route::get('/booking', [HomeController::class, 'booking'])->name('booking')->middleware('permission:View Booking');
     Route::get('/plot', [HomeController::class, 'plot'])->name('plot')->middleware('permission:View Plot');

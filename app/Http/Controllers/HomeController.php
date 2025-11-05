@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+     public function form()
+     {
+          return view('admin.landingpage.herosection.form');
+     }
      public function landingPage()
      {
           return view('pages.landing');
      }
-
 
      public function aboutPage()
      {
@@ -24,7 +28,7 @@ class HomeController extends Controller
 
      public function dashboard()
      {
-          return view('admin.dashboard');
+          return view('admin.layouts.dashboard');
      }
 
      public function booking()

@@ -99,9 +99,13 @@ class RoleController extends Controller
 
         $role = Role::findOrFail($id);
 
-        // Check if the role is assigned to any users
+
+        if ($role->name == 'Super Admin') {
+            return redirect()->back()->with("error", "Super Admin Can't Deleted");
+        }
+
         if ($role->users()->count() > 0) {
-            return redirect()->back()->with('error', 'You Cant delete this! It has Roles');
+            return redirect()->back()->with("error", "You can't delete this! This roles assign to a user");
         }
 
         $role->delete();
