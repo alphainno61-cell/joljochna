@@ -82,8 +82,7 @@ class LandingPageController extends Controller
 
             $message = $request->id ? 'মূল্য সেকশন সফলভাবে আপডেট করা হয়েছে' : 'মূল্য সেকশন সফলভাবে তৈরি করা হয়েছে';
 
-            return redirect()->route('admin.price-section.index')
-                ->with('success', $message);
+            return redirect()->back()->with('success', 'Data saved successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()

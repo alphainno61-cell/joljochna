@@ -22,11 +22,10 @@ class FeatureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon' => 'nullable|string|max:255',
+            'icon' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
-            'order' => 'nullable|integer|min:0',
-            'is_active' => 'nullable|boolean',
+
         ];
     }
 
