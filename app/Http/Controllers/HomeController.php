@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HeroSection;
+use App\Models\Opportunity;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 
-     public function form()
-     {
-          return view('admin.landingpage.herosection.form');
-     }
+
      public function landingPage()
      {
-          return view('pages.landing');
+          $heroData = HeroSection::first();
+          $opportunities = Opportunity::all();
+          return view('pages.landing', compact('opportunities', 'heroData'));
      }
 
      public function aboutPage()

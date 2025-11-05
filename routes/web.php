@@ -5,6 +5,8 @@ use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\LandingPageController;
+use App\Http\Controllers\Backend\OpportunityController;
 use App\Http\Controllers\RoleController;
 
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
@@ -19,7 +21,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
 
-    Route::get('/form', [HomeController::class, 'form'])->name('form');
+    Route::get('/herosection', [LandingPageController::class, 'heroSection'])->name('heroSection');
+    Route::put('/updateherosection', [LandingPageController::class, 'updateOrCreate'])->name('updateorcreate');
+
+
+    Route::resource('opportunity', OpportunityController::class);
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('permission:View Dashboard');
     Route::get('/booking', [HomeController::class, 'booking'])->name('booking')->middleware('permission:View Booking');

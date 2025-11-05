@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-brand">
-        <span>ডাশবোর্ডগুলো</span>
+        <h3>ডাশবোর্ড</h3>
         <button class="btn btn-link text-white p-0 d-md-none" id="sidebarToggle">
             <i class="bi bi-x-lg"></i>
         </button>
@@ -72,6 +72,34 @@
                     </div>
                 </li>
             @endcanany
+
+            <li class="nav-item">
+                <a href="#landingPage" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded=""
+                    aria-controls="accessControl">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>ল্যান্ডিং পেইজ</span>
+                    <i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <div class="collapse " id="landingPage">
+                    <ul class="nav flex-column ms-3">
+
+                        <li class="nav-item">
+                            <a href="{{ route('heroSection') }}" class="nav-link ">
+                                <i class="bi bi-key"></i>
+                                <span>হিরো সেকশন</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('opportunity.index') }}" class="nav-link ">
+                                <i class="bi bi-key"></i>
+                                <span>সুবিধাসমূহ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
 
             @can('View Booking')
                 <li class="nav-item">

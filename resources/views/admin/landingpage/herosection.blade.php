@@ -4,12 +4,39 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-12">
+
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <!-- Error Messages -->
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>কিছু ত্রুটি হয়েছে:</strong>
+                        <ul class="mb-0 mt-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <div class="card shadow">
                     <div class="card-header bg-success text-white">
-                        <h4 class="mb-0">মূল্য বুদ্ধির আগে - সেকশন আপডেট করুন</h4>
+                        <h4 class="mb-0">
+                            <i class="fas fa-edit me-2"></i>
+                            মূল্য বুদ্ধির আগে - সেকশন আপডেট করুন
+                        </h4>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form action="{{ route('updateorcreate') }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -46,18 +73,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Booking Amount -->
-                            <div class="mb-4">
-                                <label for="booking_amount" class="form-label fw-bold">বুকিং পরিমাণ (টাকা)</label>
-                                <input type="number" class="form-control @error('booking_amount') is-invalid @enderror"
-                                    id="booking_amount" name="booking_amount"
-                                    value="{{ old('booking_amount', $priceSection->booking_amount ?? 10000) }}"
-                                    min="0" step="1" required>
-                                @error('booking_amount')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <!-- Primary Button Text -->
                             <div class="mb-4">
                                 <label for="primary_button_text" class="form-label fw-bold">প্রাথমিক বাটন টেক্সট</label>
@@ -74,7 +89,7 @@
                             <!-- Primary Button URL -->
                             <div class="mb-4">
                                 <label for="primary_button_url" class="form-label fw-bold">প্রাথমিক বাটন URL</label>
-                                <input type="url" class="form-control @error('primary_button_url') is-invalid @enderror"
+                                <input type="text" class="form-control @error('primary_button_url') is-invalid @enderror"
                                     id="primary_button_url" name="primary_button_url"
                                     value="{{ old('primary_button_url', $priceSection->primary_button_url ?? '#') }}"
                                     required>
@@ -85,8 +100,7 @@
 
                             <!-- Secondary Button Text -->
                             <div class="mb-4">
-                                <label for="secondary_button_text" class="form-label fw-bold">সেকেন্ডারি বাটন
-                                    টেক্সট</label>
+                                <label for="secondary_button_text" class="form-label fw-bold">সেকেন্ডারি বাটন টেক্সট</label>
                                 <input type="text"
                                     class="form-control @error('secondary_button_text') is-invalid @enderror"
                                     id="secondary_button_text" name="secondary_button_text"
@@ -100,7 +114,7 @@
                             <!-- Secondary Button URL -->
                             <div class="mb-4">
                                 <label for="secondary_button_url" class="form-label fw-bold">সেকেন্ডারি বাটন URL</label>
-                                <input type="url"
+                                <input type="text"
                                     class="form-control @error('secondary_button_url') is-invalid @enderror"
                                     id="secondary_button_url" name="secondary_button_url"
                                     value="{{ old('secondary_button_url', $priceSection->secondary_button_url ?? '#') }}"
@@ -110,46 +124,46 @@
                                 @enderror
                             </div>
 
-                            <!-- Background Color -->
-                            {{-- <div class="mb-4">
-                                <label for="background_color" class="form-label fw-bold">ব্যাকগ্রাউন্ড রঙ</label>
-                                <input type="color"
-                                    class="form-control form-control-color @error('background_color') is-invalid @enderror"
-                                    id="background_color" name="background_color"
-                                    value="{{ old('background_color', $priceSection->background_color ?? '#1e7e5c') }}"
-                                    required>
-                                @error('background_color')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
-
-                            <!-- Status -->
-                            <div class="mb-4">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
-                                        value="1"
-                                        {{ old('is_active', $priceSection->is_active ?? true) ? 'checked' : '' }}>
-                                    <label class="form-check-label fw-bold" for="is_active">
-                                        সেকশন সক্রিয় করুন
-                                    </label>
-                                </div>
-                            </div>
-
                             <!-- Submit Buttons -->
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="" class="btn btn-secondary">
-                                    বাতিল করুন
+                                <a href="{{ route('dashboard') }}" class="btn btn-secondary me-md-2">
+                                    <i class="fas fa-arrow-left me-1"></i> ফিরে যান
                                 </a>
                                 <button type="submit" class="btn btn-success">
-                                    আপডেট করুন
+                                    <i class="fas fa-save me-1"></i> আপডেট করুন
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
+@endsection
+
+@section('styles')
+    <style>
+        .alert {
+            border-radius: 8px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+        }
+
+        .card-header {
+            border-radius: 12px 12px 0 0 !important;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+        }
+
+        .btn {
+            border-radius: 8px;
+            padding: 10px 20px;
+        }
+    </style>
 @endsection
