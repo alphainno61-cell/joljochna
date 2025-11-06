@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HeroSection;
 use App\Models\Opportunity;
 use App\Models\Pricing;
+use App\Models\Project;
 use App\Models\SocialMedia;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class HomeController extends Controller
           $pricings = Pricing::active()->ordered()->get();
           $testimonials = Testimonial::active()->ordered()->get();
           $socialMediaLinks =  SocialMedia::active()->ordered()->get()->groupBy('carousel_group');
+          $projects = Project::active()->ordered()->paginate(8);
 
-          return view('pages.landing', compact('opportunities', 'heroData', 'pricings', 'testimonials', 'socialMediaLinks'));
+          return view('pages.landing', compact('opportunities', 'heroData', 'pricings', 'testimonials', 'socialMediaLinks', 'projects'));
      }
 
      public function aboutPage()

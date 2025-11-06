@@ -75,15 +75,15 @@
 
             <li class="nav-item">
                 <a href="#landingPage"
-                    class="nav-link {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'active' : '' }}"
+                    class="nav-link {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index', 'admin.projects.index', 'admin.bookings.index']) ? 'active' : '' }}"
                     data-bs-toggle="collapse" role="button"
-                    aria-expanded="{{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'true' : 'false' }}"
+                    aria-expanded="{{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index', 'admin.projects.index', 'admin.bookings.index']) ? 'true' : 'false' }}"
                     aria-controls="landingPage">
                     <i class="bi bi-shield-lock"></i>
                     <span>ল্যান্ডিং পেইজ</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <div class="collapse {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'show' : '' }}"
+                <div class="collapse {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index', 'admin.projects.index', 'admin.bookings.index']) ? 'show' : '' }}"
                     id="landingPage">
                     <ul class="nav flex-column ms-3">
 
@@ -127,6 +127,24 @@
                                 <span>সোস্যাল মিডিয়া</span>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.projects.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.projects.index') ? 'active' : '' }}">
+                                <i class="bi bi-key"></i>
+                                <span>প্রজেক্টস</span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.bookings.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.bookings.index') ? 'active' : '' }}">
+                                <i class="bi bi-key"></i>
+                                <span>বুকিং</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </li>

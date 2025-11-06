@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AssignRoleController;
+use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\SocialMediaController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Backend\BookingController as BackendBookingController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Backend\LandingPageController;
 use App\Http\Controllers\Backend\OpportunityController;
 use App\Http\Controllers\Backend\PricingController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\RoleController;
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
 Route::get('/projects', [HomeController::class, 'othersProjects'])->name('projects');
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
 
 
@@ -35,6 +39,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('pricing', PricingController::class);
         Route::resource('testimonials', TestimonialController::class);
         Route::resource('socialmedias', SocialMediaController::class);
+        Route::resource('projects', ProjectController::class);
+
+        Route::resource('bookings', BackendBookingController::class)->except(['create', 'store', 'edit']);
+        Route::put('bookings/{booking}/status', [BackendBookingController::class, 'updateStatus'])->name('bookings.update-status');
     });
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('permission:View Dashboard');
