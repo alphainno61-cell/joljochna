@@ -8,23 +8,35 @@ use App\Models\Pricing;
 use App\Models\Project;
 use App\Models\SocialMedia;
 use App\Models\Testimonial;
+use App\Models\ContactInfo;
+use App\Models\Plot;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 
 
-     public function landingPage()
-     {
-          $heroData = HeroSection::first();
-          $opportunities = Opportunity::all();
-          $pricings = Pricing::active()->ordered()->get();
-          $testimonials = Testimonial::active()->ordered()->get();
-          $socialMediaLinks =  SocialMedia::active()->ordered()->get()->groupBy('carousel_group');
-          $projects = Project::active()->ordered()->paginate(8);
+public function landingPage()
+{
+    $heroData = HeroSection::first();
+    $opportunities = Opportunity::all();
+    $pricings = Pricing::active()->ordered()->get();
+    $testimonials = Testimonial::active()->ordered()->get();
+    $socialMediaLinks = SocialMedia::active()->ordered()->get()->groupBy('carousel_group');
+    $projects = Project::active()->ordered()->paginate(8);
+    $contactInfo = ContactInfo::getContactInfo();
+    $plots = Plot::active()->ordered()->get();
+        
+        // Static amenities - no need for database
+        $amenities = [
+            ['name' => 'ক্লাব হাউজ', 'icon' => '🏠'],
+            ['name' => 'জিম', 'icon' => '💪'],
+            ['name' => 'মসজিদ', 'icon' => '🕌'],
+            ['name' => 'শপিং এরিয়া', 'icon' => '🛍️'],
+        ];
 
-          return view('pages.landing', compact('opportunities', 'heroData', 'pricings', 'testimonials', 'socialMediaLinks', 'projects'));
-     }
+    return view('pages.landing', compact('opportunities', 'heroData', 'pricings', 'testimonials', 'socialMediaLinks', 'projects', 'contactInfo', 'plots', 'amenities'));
+}
 
      public function aboutPage()
      {

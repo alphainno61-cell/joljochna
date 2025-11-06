@@ -27,7 +27,7 @@ class SocialMediaController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
             'url' => 'nullable|url|max:500',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'sort_order' => 'integer',
             'carousel_group' => 'required|integer|min:1',
             'is_active' => 'boolean'
@@ -58,7 +58,7 @@ class SocialMediaController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:500',
             'url' => 'nullable|url|max:500',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'sort_order' => 'integer',
             'carousel_group' => 'required|integer|min:1',
             'is_active' => 'boolean'

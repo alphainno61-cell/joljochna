@@ -115,60 +115,46 @@
 <div class="container main-section py-4 mb-4">
   <div class="row align-items-stretch">
     <!-- LEFT SIDE - OFFER DETAILS -->
-    <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-      <div class="offer-card h-100">
+  <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+    <div class="offer-card h-100">
         <h2 class="offer-title">বেছে নিন আপনার পছন্দের প্লট</h2>
 
         <div class="row g-3 justify-content-center">
-          <div class="col-6">
-            <div class="plot-box">
-              <div class="plot-size">৮ কাঠা</div>
-              <div class="category-label">প্রিমিয়াম প্লট</div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="plot-box">
-              <div class="plot-size">১০ কাঠা</div>
-              <div class="category-label">ডিলাক্স প্লট</div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="plot-box">
-              <div class="plot-size">৩০ কাঠা</div>
-              <div class="category-label">এক্সিকিউটিভ প্লট</div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="plot-box">
-              <div class="plot-size">২০ কাঠা</div>
-              <div class="category-label">কর্পোরেট প্লট</div>
-            </div>
-          </div>
+            @foreach($plots as $plot)
+                <div class="col-6">
+                    <div class="plot-box">
+                        <div class="plot-size">{{ $plot->size }}</div>
+                        <div class="category-label {{ $plot->category_color }} text-white">
+                            {{ $plot->category }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <div class="mt-3 text-center">
-          <span class="category-label bg-success text-white">ক্লাব হাউজ</span>
-          <span class="category-label bg-success text-white">জিম</span>
-          <span class="category-label bg-success text-white">মসজিদ</span>
-          <span class="category-label bg-success text-white">শপিং এরিয়া</span>
+            @foreach($amenities as $amenity)
+                <span class="category-label bg-success text-white">
+                    {!! $amenity['icon'] !!} {{ $amenity['name'] }}
+                </span>
+            @endforeach
         </div>
 
         <div class="footer-note">
-          <p>
-            সবুজ প্রকৃতি, নীরব কলকল ধারা আর নির্মল আবহাওয়া — এই জায়গাটি হতে পারে আপনার স্বপ্নের ঠিকানা!
-            এখানে আছে আধুনিক রাস্তাঘাট, বিদ্যুৎ, পানি, গ্যাস, ও নিরাপত্তার নিশ্চয়তা।
-          </p>
-          <p>মূল্য বৃদ্ধির আগে, আজই বুকিং করুন।</p>
+            <p>
+                সবুজ প্রকৃতি, নীরব কলকল ধারা আর নির্মল আবহাওয়া — এই জায়গাটি হতে পারে আপনার স্বপ্নের ঠিকানা!
+                এখানে আছে আধুনিক রাস্তাঘাট, বিদ্যুৎ, পানি, গ্যাস, ও নিরাপত্তার নিশ্চয়তা।
+            </p>
+            <p>মূল্য বৃদ্ধির আগে, আজই বুকিং করুন।</p>
         </div>
 
         <div class="cta-bar">
-          📞 এখনই যোগাযোগ করুন — সীমিত সময়ের অফার
+            📞 এখনই যোগাযোগ করুন — সীমিত সময়ের অফার
         </div>
-      </div>
     </div>
+</div>
+
+
 
     <!-- RIGHT SIDE - MAP -->
     <div class="col-lg-6 col-md-12">
@@ -179,3 +165,68 @@
     </div>
   </div>
 </div>
+
+<style>
+.offer-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.offer-title {
+    color: #2c5f2d;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.plot-box {
+    border: 2px solid #2c5f2d;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background: #f8fff8;
+    transition: transform 0.3s ease;
+}
+
+.plot-box:hover {
+    transform: translateY(-5px);
+}
+
+.plot-size {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c5f2d;
+    margin-bottom: 8px;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+.footer-note {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    color: black;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.cta-bar {
+    background: #2c5f2d;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>

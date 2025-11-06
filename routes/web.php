@@ -13,7 +13,10 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Backend\LandingPageController;
 use App\Http\Controllers\Backend\OpportunityController;
 use App\Http\Controllers\Backend\PricingController;
+use App\Http\Controllers\Backend\ContactInfoController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Admin\PlotController;
+
 
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
@@ -40,7 +43,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('testimonials', TestimonialController::class);
         Route::resource('socialmedias', SocialMediaController::class);
         Route::resource('projects', ProjectController::class);
-
+        Route::get('/contact-info', [ContactInfoController::class, 'edit'])->name('contact-info.edit');
+        Route::put('/contact-info', [ContactInfoController::class, 'update'])->name('contact-info.update');
+        Route::resource('plots', PlotController::class);
         Route::resource('bookings', BackendBookingController::class)->except(['create', 'store', 'edit']);
         Route::put('bookings/{booking}/status', [BackendBookingController::class, 'updateStatus'])->name('bookings.update-status');
     });
