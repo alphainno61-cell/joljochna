@@ -14,6 +14,8 @@
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <style>
+        /* Updated Sidebar Styles - Replace in your layout file */
+
         :root {
             --sidebar-width: 230px;
             --header-height: 90px;
@@ -35,6 +37,7 @@
             min-height: 100vh;
         }
 
+        /* Fixed Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
             background: var(--primary-green);
@@ -43,8 +46,31 @@
             left: 0;
             height: 100vh;
             overflow-y: auto;
+            overflow-x: hidden;
             transition: transform 0.3s ease;
             z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            /* Smooth scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .sidebar-brand {
@@ -56,10 +82,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-shrink: 0;
         }
 
+        .sidebar-brand h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            white-space: nowrap;
+        }
+
+        /* Sidebar Navigation */
         .sidebar-nav {
             padding: 1rem 0;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+            /* Space for logout button */
         }
 
         .sidebar-nav .nav-item {
@@ -75,6 +114,8 @@
             border-left: 3px solid transparent;
             transition: all 0.2s;
             font-size: 0.95rem;
+            white-space: nowrap;
+            text-decoration: none;
         }
 
         .sidebar-nav .nav-link:hover {
@@ -91,16 +132,28 @@
         .sidebar-nav .nav-link i {
             font-size: 1.1rem;
             width: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-nav .nav-link span {
+            flex: 1;
+            min-width: 0;
         }
 
         .sidebar-nav .nav-link .ms-auto {
             margin-left: auto;
             font-size: 0.875rem;
             transition: transform 0.2s;
+            flex-shrink: 0;
         }
 
         .sidebar-nav .nav-link[aria-expanded="true"] .ms-auto {
             transform: rotate(180deg);
+        }
+
+        /* Collapsed submenu styles */
+        .sidebar-nav .collapse {
+            overflow: hidden;
         }
 
         .sidebar-nav .collapse .nav-link {
@@ -112,13 +165,17 @@
             font-size: 0.95rem;
         }
 
+        /* Logout button - fixed at bottom */
         .sidebar-logout {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
+            width: var(--sidebar-width);
             padding: 1rem 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--dark-green);
+            z-index: 10;
+            transition: transform 0.3s ease;
         }
 
         .sidebar-logout button {
@@ -131,13 +188,21 @@
             gap: 0.5rem;
             font-size: 0.95rem;
             cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s;
         }
 
+        .sidebar-logout button:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Content */
         .main-content {
             flex: 1;
             margin-left: var(--sidebar-width);
             transition: margin-left 0.3s ease;
-            width: 100%;
+            width: calc(100% - var(--sidebar-width));
+            min-width: 0;
         }
 
         .header {
@@ -202,6 +267,7 @@
             min-height: calc(100vh - var(--header-height));
         }
 
+        /* Stat Cards */
         .stat-card {
             background: white;
             border-radius: 0.75rem;
@@ -270,6 +336,18 @@
             color: #1f2937;
         }
 
+        /* Tablet Styles */
+        @media (max-width: 992px) {
+            .search-box {
+                width: 250px;
+            }
+
+            .header-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -279,14 +357,43 @@
                 transform: translateX(0);
             }
 
+            /* Adjust logout button for mobile */
+            .sidebar-logout {
+                left: 0;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show .sidebar-logout {
+                transform: translateX(0);
+            }
+
             .main-content {
                 margin-left: 0;
+                width: 100%;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .header-title {
+                font-size: 1.25rem;
             }
 
             .search-box {
-                width: 200px;
+                width: 150px;
             }
 
+            .search-box input {
+                font-size: 0.813rem;
+                padding: 0.4rem 0.8rem 0.4rem 2rem;
+            }
+
+            .content-area {
+                padding: 1rem;
+            }
+
+            /* Overlay for mobile menu */
             .overlay {
                 display: none;
                 position: fixed;
@@ -300,6 +407,53 @@
 
             .overlay.show {
                 display: block;
+            }
+
+            /* Stat cards responsive */
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .stat-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Small Mobile Styles */
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 280px;
+            }
+
+            .sidebar-logout {
+                width: 280px;
+            }
+
+            .header-title {
+                font-size: 1.1rem;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .user-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Prevent body scroll when sidebar is open on mobile */
+        @media (max-width: 768px) {
+            body.sidebar-open {
+                overflow: hidden;
             }
         }
     </style>
@@ -326,6 +480,7 @@
         const sidebar = document.querySelector('.sidebar');
         const overlay = document.getElementById('overlay');
         const toggleBtns = document.querySelectorAll('#sidebarToggle');
+        const body = document.body;
 
         // Handle both toggle buttons (header and sidebar)
         toggleBtns.forEach(btn => {
@@ -333,12 +488,23 @@
                 e.preventDefault();
                 sidebar.classList.toggle('show');
                 overlay.classList.toggle('show');
+                body.classList.toggle('sidebar-open');
             });
         });
 
         overlay?.addEventListener('click', () => {
             sidebar.classList.remove('show');
             overlay.classList.remove('show');
+            body.classList.remove('sidebar-open');
+        });
+
+        // Close sidebar on window resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+                body.classList.remove('sidebar-open');
+            }
         });
     </script>
 
@@ -383,7 +549,67 @@
             toastr.warning("{{ Session::get('warning') }}");
         @endif
     </script>
+
     @stack('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const installmentsContainer = document.getElementById('installments-container');
+            const addInstallmentBtn = document.getElementById('add-installment');
+
+            // Add installment row
+            addInstallmentBtn.addEventListener('click', function() {
+                const index = installmentsContainer.children.length;
+
+                const row = document.createElement('div');
+                row.className = 'installment-row row mb-2';
+                row.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="installments[${index}][installment]" 
+                       placeholder="কিস্তির বিবরণ (যেমন: ০৩ কিস্তি)" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" class="form-control" name="installments[${index}][amount]" 
+                       placeholder="টাকার পরিমাণ (যেমন: ৪০,০০০০০ টাকা)" required>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger btn-sm remove-installment">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+
+                installmentsContainer.appendChild(row);
+            });
+
+            // Remove installment row using event delegation
+            installmentsContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-installment')) {
+                    const row = e.target.closest('.installment-row');
+                    row.remove();
+
+                    // Re-index the remaining installments
+                    reindexInstallments();
+                }
+            });
+
+            // Function to re-index installments after removal
+            function reindexInstallments() {
+                const rows = installmentsContainer.querySelectorAll('.installment-row');
+                rows.forEach((row, index) => {
+                    const installmentInput = row.querySelector('input[name*="[installment]"]');
+                    const amountInput = row.querySelector('input[name*="[amount]"]');
+
+                    if (installmentInput) {
+                        installmentInput.name = `installments[${index}][installment]`;
+                    }
+                    if (amountInput) {
+                        amountInput.name = `installments[${index}][amount]`;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

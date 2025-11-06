@@ -1,17 +1,22 @@
 <?php
 
 use App\Http\Controllers\AssignRoleController;
+use App\Http\Controllers\Backend\SocialMediaController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\LandingPageController;
 use App\Http\Controllers\Backend\OpportunityController;
+use App\Http\Controllers\Backend\PricingController;
 use App\Http\Controllers\RoleController;
 
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
 Route::get('/projects', [HomeController::class, 'othersProjects'])->name('projects');
+
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -24,8 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/herosection', [LandingPageController::class, 'heroSection'])->name('heroSection');
     Route::put('/updateherosection', [LandingPageController::class, 'updateOrCreate'])->name('updateorcreate');
 
-
     Route::resource('opportunity', OpportunityController::class);
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('pricing', PricingController::class);
+        Route::resource('testimonials', TestimonialController::class);
+        Route::resource('socialmedias', SocialMediaController::class);
+    });
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('permission:View Dashboard');
     Route::get('/booking', [HomeController::class, 'booking'])->name('booking')->middleware('permission:View Booking');

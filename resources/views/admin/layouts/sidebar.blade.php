@@ -74,26 +74,57 @@
             @endcanany
 
             <li class="nav-item">
-                <a href="#landingPage" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded=""
-                    aria-controls="accessControl">
+                <a href="#landingPage"
+                    class="nav-link {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'active' : '' }}"
+                    data-bs-toggle="collapse" role="button"
+                    aria-expanded="{{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'true' : 'false' }}"
+                    aria-controls="landingPage">
                     <i class="bi bi-shield-lock"></i>
                     <span>ল্যান্ডিং পেইজ</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <div class="collapse " id="landingPage">
+                <div class="collapse {{ request()->routeIs(['heroSection', 'opportunity.index', 'admin.pricing.index', 'admin.testimonials.index', 'admin.socialmedias.index']) ? 'show' : '' }}"
+                    id="landingPage">
                     <ul class="nav flex-column ms-3">
 
                         <li class="nav-item">
-                            <a href="{{ route('heroSection') }}" class="nav-link ">
+                            <a href="{{ route('heroSection') }}"
+                                class="nav-link {{ request()->routeIs('heroSection') ? 'active' : '' }}">
                                 <i class="bi bi-key"></i>
                                 <span>হিরো সেকশন</span>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('opportunity.index') }}" class="nav-link ">
+                        <li class="nav-item ">
+                            <a href="{{ route('opportunity.index') }}"
+                                class="nav-link {{ request()->routeIs('opportunity.index') ? 'active' : '' }}">
                                 <i class="bi bi-key"></i>
                                 <span>সুবিধাসমূহ</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.pricing.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.pricing.index') ? 'active' : '' }}">
+                                <i class="bi bi-key"></i>
+                                <span>প্রাইসিং</span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.testimonials.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.testimonials.index') ? 'active' : '' }}">
+                                <i class="bi bi-key"></i>
+                                <span>মন্তব্য সমূহ</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.socialmedias.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.socialmedias.index') ? 'active' : '' }}">
+                                <i class="bi bi-key"></i>
+                                <span>সোস্যাল মিডিয়া</span>
                             </a>
                         </li>
                     </ul>

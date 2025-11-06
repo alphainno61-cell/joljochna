@@ -42,8 +42,6 @@ class FeatureRequest extends FormRequest
             'description.required' => 'বিবরণ আবশ্যক।',
             'description.max' => 'বিবরণ সর্বাধিক ১০০০ অক্ষর হতে হবে।',
             'icon.max' => 'আইকন সর্বাধিক ২৫৫ অক্ষর হতে হবে।',
-            'order.integer' => 'ক্রম একটি সংখ্যা হতে হবে।',
-            'order.min' => 'ক্রম ০ বা তার বেশি হতে হবে।',
         ];
     }
 }

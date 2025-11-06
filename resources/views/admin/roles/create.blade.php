@@ -1,86 +1,70 @@
 @extends('admin.layouts.layout')
 
-<style>
-    label {
-        font-size: 18px
-    }
-
-    input {
-        width: 20px
-    }
-</style>
-
-
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h1>Role</h1>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-plus me-2"></i>
+                            Assign Permission To a Role
+                        </h4>
+                    </div>
+                    <div class="card-body">
 
-        </div>
+                        <form action="{{ route('roles.store') }}" method="POST">
+                            @csrf
+                            <div>
+                                <input class="form-control my-2" type="text" name="name"
+                                    placeholder="Role Name exp: Admin, Manager">
+                            </div>
 
-        <div class="section-body">
+                            <div class="container mt-3">
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Create Role</h4>
-                        </div>
-                        <div class="card-body">
-
-                            <form action="{{ route('roles.store') }}" method="POST">
-                                @csrf
-                                <div>
-                                    <input class="form-control my-2" type="text" name="name"
-                                        placeholder="Role Name exp: Admin, Manager">
+                                <div class="row mb-4">
+                                    <div class="col-12">
+                                        <input id="select-all-permissions" type="checkbox">
+                                        <label for="select-all-permissions">Select All Permissions</label>
+                                    </div>
                                 </div>
-
-                                <div class="container mt-3">
-
+                                @foreach ($permissions as $groupby => $permission)
                                     <div class="row mb-4">
                                         <div class="col-12">
-                                            <input id="select-all-permissions" type="checkbox">
-                                            <label for="select-all-permissions">Select All Permissions</label>
+                                            <h5>{{ $groupby }}</h5>
+                                            @if (count($permission) > 1)
+                                                <input id="select-group-{{ $groupby }}" type="checkbox"
+                                                    class="select-group">
+                                                <label class="mb-2" for="select-group-{{ $groupby }}">Select All
+                                                    {{ $groupby }}</label>
+                                            @endif
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex flex-wrap">
+                                                @foreach ($permission as $item)
+                                                    <div class="mb-2 mr-5 me-3">
+                                                        <input id="permission-{{ $item->id }}" type="checkbox"
+                                                            class="rounded permission-checkbox" name="permission[]"
+                                                            value="{{ $item->name }}" data-group="{{ $groupby }}">
+                                                        <label
+                                                            for="permission-{{ $item->id }}">{{ $item->name }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
-                                    @foreach ($permissions as $groupby => $permission)
-                                        <div class="row mb-4">
-                                            <div class="col-12">
-                                                <h5>{{ $groupby }}</h5>
-                                                @if (count($permission) > 1)
-                                                    <input id="select-group-{{ $groupby }}" type="checkbox"
-                                                        class="select-group">
-                                                    <label for="select-group-{{ $groupby }}">Select All
-                                                        {{ $groupby }}</label>
-                                                @endif
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="d-flex flex-wrap">
-                                                    @foreach ($permission as $item)
-                                                        <div class="mb-2 mr-5">
-                                                            <input id="permission-{{ $item->id }}" type="checkbox"
-                                                                class="rounded permission-checkbox" name="permission[]"
-                                                                value="{{ $item->name }}"
-                                                                data-group="{{ $groupby }}">
-                                                            <label
-                                                                for="permission-{{ $item->id }}">{{ $item->name }}</label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    <button class="btn btn-primary mt-3">Submit</button>
-                                </div>
-                            </form>
+                                @endforeach
+                                <button class="btn btn-primary mt-3">Submit</button>
+                            </div>
+                        </form>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-    </section>
+    </div>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
