@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\FooterSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -18,7 +19,8 @@ class LoginController extends Controller
             return redirect()->intended(route('dashboard'));
         }
 
-        return view('auth.login');
+        $footerSetting = FooterSetting::first();
+        return view('auth.login', compact('footerSetting'));
     }
 
 

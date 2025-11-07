@@ -8,10 +8,10 @@
         </div>
 
         <div class="header-actions">
-            <div class="search-box d-none d-sm-block">
+            {{-- <div class="search-box d-none d-sm-block">
                 <i class="bi bi-search"></i>
                 <input type="text" class="form-control" placeholder="খুঁজুন...">
-            </div>
+            </div> --}}
 
             <div class="dropdown">
                 <button class="btn p-0 border-0 bg-transparent" data-bs-toggle="dropdown">
@@ -20,8 +20,10 @@
                     </div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href=""><i class="bi bi-person me-2"></i>প্রোফাইল</a></li>
-                    <li><a class="dropdown-item" href="{{ route('setting') }}"><i class="bi bi-gear me-2"></i>সেটিংস</a>
+                    <li><a class="dropdown-item mb-2 mt-2" href="{{ route('profile.index') }}"><i
+                                class="bi bi-person me-2"></i>প্রোফাইল</a></li>
+                    <li><a class="dropdown-item mb-2" href="{{ route('admin.footer-settings.index') }}"><i
+                                class="bi bi-gear me-2"></i>সেটিংস</a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

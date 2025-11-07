@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FooterSettingController;
 use App\Http\Controllers\AssignRoleController;
 use App\Http\Controllers\Backend\ProjectController;
 use App\Http\Controllers\Backend\SocialMediaController;
@@ -16,7 +17,7 @@ use App\Http\Controllers\Backend\PricingController;
 use App\Http\Controllers\Backend\ContactInfoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Admin\PlotController;
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
@@ -33,21 +34,81 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
 
-    Route::get('/herosection', [LandingPageController::class, 'heroSection'])->name('heroSection');
-    Route::put('/updateherosection', [LandingPageController::class, 'updateOrCreate'])->name('updateorcreate');
+    Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.index');
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
-    Route::resource('opportunity', OpportunityController::class);
+
+    Route::get('/herosection', [LandingPageController::class, 'heroSection'])
+        ->name('heroSection')
+        ->middleware('permission:Hero Section');
+
+    Route::put('/updateherosection', [LandingPageController::class, 'updateOrCreate'])
+        ->name('updateorcreate')
+        ->middleware('permission:Hero Section');
+
+    Route::resource('opportunity', OpportunityController::class)->middleware([
+        'permission:View Opportunity Section',
+        'permission:Create Opportunity Section',
+        'permission:Edit Opportunity Section',
+        'permission:Delete Opportunity Section'
+    ]);
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('pricing', PricingController::class);
-        Route::resource('testimonials', TestimonialController::class);
-        Route::resource('socialmedias', SocialMediaController::class);
-        Route::resource('projects', ProjectController::class);
-        Route::get('/contact-info', [ContactInfoController::class, 'edit'])->name('contact-info.edit');
-        Route::put('/contact-info', [ContactInfoController::class, 'update'])->name('contact-info.update');
-        Route::resource('plots', PlotController::class);
-        Route::resource('bookings', BackendBookingController::class)->except(['create', 'store', 'edit']);
-        Route::put('bookings/{booking}/status', [BackendBookingController::class, 'updateStatus'])->name('bookings.update-status');
+
+        Route::resource('pricing', PricingController::class)->middleware([
+            'permission:View Pricing Section',
+            'permission:Create Pricing Section',
+            'permission:Edit Pricing Section',
+            'permission:Delete Pricing Section'
+        ]);
+        Route::resource('testimonials', TestimonialController::class)->middleware([
+            'permission:View Testimonial Section',
+            'permission:Create Testimonial Section',
+            'permission:Edit Testimonial Section',
+            'permission:Delete Testimonial Section'
+        ]);
+
+        Route::resource('socialmedias', SocialMediaController::class)->middleware([
+            'permission:View SocialMedia Section',
+            'permission:Create SocialMedia Section',
+            'permission:Edit SocialMedia Section',
+            'permission:Delete SocialMedia Section'
+        ]);
+
+        Route::resource('projects', ProjectController::class)->middleware([
+            'permission:View Projects Section',
+            'permission:Create Projects Section',
+            'permission:Edit Projects Section',
+            'permission:Delete Projects Section'
+        ]);
+
+        Route::get('/contact-info', [ContactInfoController::class, 'edit'])->name('contact-info.edit')
+            ->middleware('permission:Contact Section');
+        Route::put('/contact-info', [ContactInfoController::class, 'update'])->name('contact-info.update')
+            ->middleware('permission:Contact Section');
+
+        Route::resource('plots', PlotController::class)->middleware([
+            'permission:View Plot',
+            'permission:Create Plot',
+            'permission:Edit Plot',
+            'permission:Delete Plot'
+        ]);
+        Route::resource('bookings', BackendBookingController::class)->except(['create', 'store', 'edit'])->middleware([
+            'permission:View Booking',
+            'permission:Edit Booking',
+            'permission:Delete Booking'
+        ]);
+
+        Route::put('bookings/{booking}/status', [BackendBookingController::class, 'updateStatus'])->name('bookings.update-status')
+            ->middleware('permission:Edit Booking');
+
+        Route::get('footer-settings', [FooterSettingController::class, 'index'])
+            ->name('footer-settings.index')
+            ->middleware('permission:Setting');
+        Route::post('footer-settings', [FooterSettingController::class, 'storeOrUpdate'])
+            ->name('footer-settings.store-or-update')
+            ->middleware('permission:Setting');
     });
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('permission:View Dashboard');

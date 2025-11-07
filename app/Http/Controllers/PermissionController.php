@@ -37,8 +37,36 @@ class PermissionController extends Controller
             'Edit AssignRole',
             'Delete AssignRole',
 
+            'Hero Section',
+
+            'View Opportunity Section',
+            'Create Opportunity Section',
+            'Edit Opportunity Section',
+            'Delete Opportunity Section',
+
+            'View Pricing Section',
+            'Create Pricing Section',
+            'Edit Pricing Section',
+            'Delete Pricing Section',
+
+            'View Testimonial Section',
+            'Create Testimonial Section',
+            'Edit Testimonial Section',
+            'Delete Testimonial Section',
+
+            'View SocialMedia Section',
+            'Create SocialMedia Section',
+            'Edit SocialMedia Section',
+            'Delete SocialMedia Section',
+
+            'View Projects Section',
+            'Create Projects Section',
+            'Edit Projects Section',
+            'Delete Projects Section',
+
+            'Contact Section',
+
             'View Booking',
-            'Create Booking',
             'Edit Booking',
             'Delete Booking',
 
@@ -47,21 +75,7 @@ class PermissionController extends Controller
             'Edit Plot',
             'Delete Plot',
 
-            'View Customer',
-            'Create Customer',
-            'Edit Customer',
-            'Delete Customer',
-
-            'View Report',
-            'Create Report',
-            'Edit Report',
-            'Delete Report',
-
-            'View Setting',
-            'Create Setting',
-            'Edit Setting',
-            'Delete Setting',
-
+            'Setting',
 
         ];
 
@@ -71,10 +85,15 @@ class PermissionController extends Controller
             'Permission',
             'Role',
             'AssignRole',
+            'Hero Section',
+            'Opportunity Section',
+            'Pricing Section',
+            'Testimonial Section',
+            'SocialMedia Section',
+            'Projects Section',
+            'Contact Section',
             'Booking',
             'Plot',
-            'Customer',
-            'Report',
             'Setting',
         ];
 

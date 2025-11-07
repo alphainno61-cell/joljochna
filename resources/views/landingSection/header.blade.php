@@ -2,8 +2,14 @@
      <div class="container-fluid">
          <!-- Logo -->
          <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-             <i class="fas fa-home me-2 text-warning"></i>
-             <span class="brand-text">জলজোছনা</span>
+
+
+             @if ($footerSetting && $footerSetting->logo_image_url)
+                 <img src="{{ $footerSetting->logo_image_url }}" alt="Logo" class="ms-2" style="height: 70px;">
+             @else
+                 <i class="fas fa-home me-2 text-warning"></i>
+                 <span class="brand-text">জলজোছনা</span>
+             @endif
          </a>
 
          <!-- Mobile Toggle Button -->
