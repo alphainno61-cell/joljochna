@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="sidebar-brand">
+    <div class="sidebar-brand bg-success">
         <h3>ডাশবোর্ড</h3>
         <button class="btn btn-link text-white p-0 d-md-none" id="sidebarToggle">
             <i class="bi bi-x-lg"></i>
@@ -258,10 +258,90 @@
                     </a>
                 </li>
             @endcan
+
+
+
+            @canany([
+                'View About Hero',
+                'View About History',
+                'View About Mission & Vision',
+                'View About Founder',
+                'View
+                About Chairman',
+                ])
+                <li class="nav-item">
+                    <a href="#about" class="nav-link {{ request()->routeIs(['View About Hero']) ? 'active' : '' }}"
+                        data-bs-toggle="collapse" role="button"
+                        aria-expanded="{{ request()->routeIs(['amader-somporke.hero', 'amader-somporke.history', 'amader-somporke.missionAndVission', 'amader-somporke.founder', 'amader-somporke.chairman']) ? 'true' : 'false' }}"
+                        aria-controls="about">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>আমাদের সম্পর্কে</span>
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <div class="collapse {{ request()->routeIs(['amader-somporke.hero', 'amader-somporke.history', 'amader-somporke.missionAndVission', 'amader-somporke.founder', 'amader-somporke.chairman']) ? 'show' : '' }}"
+                        id="about">
+                        <ul class="nav flex-column ms-3">
+
+
+                            @can('View About Hero')
+                                <li class="nav-item">
+                                    <a href="{{ route('amader-somporke.hero') }}"
+                                        class="nav-link {{ request()->routeIs('amader-somporke.hero') ? 'active' : '' }}">
+                                        <i class="bi bi-key"></i>
+                                        <span>হিরো সেকশন</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('View About History')
+                                <li class="nav-item">
+                                    <a href="{{ route('amader-somporke.history') }}"
+                                        class="nav-link {{ request()->routeIs('amader-somporke.history') ? 'active' : '' }}">
+                                        <i class="bi bi-key"></i>
+                                        <span>আমাদের ইতিহাস</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('View About Mission & Vision')
+                                <li class="nav-item">
+                                    <a href="{{ route('amader-somporke.missionAndVission') }}"
+                                        class="nav-link {{ request()->routeIs('amader-somporke.missionAndVission') ? 'active' : '' }}">
+                                        <i class="bi bi-key"></i>
+                                        <span>মিশন এবং ভিশন </span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('View About Founder')
+                                <li class="nav-item">
+                                    <a href="{{ route('amader-somporke.founder') }}"
+                                        class="nav-link {{ request()->routeIs('amader-somporke.founder') ? 'active' : '' }}">
+                                        <i class="bi bi-key"></i>
+                                        <span>আমাদের প্রতিষ্ঠাতা </span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            @can('View About Chairman')
+                                <li class="nav-item">
+                                    <a href="{{ route('amader-somporke.chairman') }}"
+                                        class="nav-link {{ request()->routeIs('amader-somporke.chairman') ? 'active' : '' }}">
+                                        <i class="bi bi-key"></i>
+                                        <span>আমাদের চেয়ারম্যান </span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                        </ul>
+                    </div>
+                </li>
+            @endcanany
         </ul>
+
     </nav>
 
-    <div class="sidebar-logout">
+    <div class="sidebar-logout bg-success">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit">

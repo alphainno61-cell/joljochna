@@ -17,7 +17,7 @@
         /* Updated Sidebar Styles - Replace in your layout file */
 
         :root {
-            --sidebar-width: 230px;
+            --sidebar-width: 240px;
             --header-height: 90px;
             --primary-green: #1a5f4a;
             --dark-green: #0d3d2f;
@@ -75,7 +75,7 @@
 
         .sidebar-brand {
             padding: 1.5rem 1rem;
-            background: var(--dark-green);
+            /* background: var(--dark-green); */
             color: white;
             font-size: 1.25rem;
             font-weight: 600;
@@ -173,7 +173,7 @@
             width: var(--sidebar-width);
             padding: 1rem 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: var(--dark-green);
+            /* background: var(--dark-green); */
             z-index: 10;
             transition: transform 0.3s ease;
         }

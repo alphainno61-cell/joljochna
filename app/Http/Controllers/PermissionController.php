@@ -77,6 +77,12 @@ class PermissionController extends Controller
 
             'Setting',
 
+            'View About Hero',
+            'View About History',
+            'View About Mission & Vision',
+            'View About Founder',
+            'View About Chairman'
+
         ];
 
 
@@ -95,6 +101,11 @@ class PermissionController extends Controller
             'Booking',
             'Plot',
             'Setting',
+            'About Hero',
+            'About History',
+            'About Mission & Vision',
+            'About Founder',
+            'About Chairman'
         ];
 
         return view('admin.permissions.create', compact('permissions', 'groupby'));

@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\Chairman;
+use App\Models\Contactinfo;
+use App\Models\FooterSetting;
+use App\Models\Founder;
+use App\Models\Hero;
 use App\Models\HeroSection;
+use App\Models\History;
+use App\Models\MissionAndVission;
 use App\Models\Opportunity;
+use App\Models\Plot;
 use App\Models\Pricing;
 use App\Models\Project;
 use App\Models\SocialMedia;
 use App\Models\Testimonial;
-use App\Models\ContactInfo;
-use App\Models\FooterSetting;
-use App\Models\Plot;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
 
      public function landingPage()
      {
@@ -52,11 +58,100 @@ class HomeController extends Controller
           return view('pages.othersProject', compact('footerSetting'));
      }
 
+
      public function dashboard()
      {
-          return view('admin.layouts.dashboard');
-     }
+          // Get counts for all models with proper status checks
+          $stats = [
+               'bookings' => [
+                    'total' => Booking::count(),
+                    'pending' => Booking::where('status', 'pending')->count(),
+                    'contacted' => Booking::where('status', 'contacted')->count(),
+                    'completed' => Booking::where('status', 'completed')->count(),
+                    'title' => 'বুকিং'
+               ],
+               'users' => [
+                    'total' => User::count(),
+                    'title' => 'ব্যবহারকারী'
+               ],
+               'projects' => [
+                    'total' => Project::count(),
+                    'active' => Project::where('is_active', true)->count(),
+                    'featured' => Project::where('is_featured', true)->count(),
+                    'title' => 'প্রকল্প'
+               ],
+               'plots' => [
+                    'total' => Plot::count(),
+                    'active' => Plot::where('is_active', true)->count(),
+                    'title' => 'প্লট'
+               ],
+               'pricings' => [
+                    'total' => Pricing::count(),
+                    'active' => Pricing::where('is_active', true)->count(),
+                    'featured' => Pricing::where('is_featured', true)->count(),
+                    'title' => 'মূল্য নির্ধারণ'
+               ],
+               'testimonials' => [
+                    'total' => Testimonial::count(),
+                    'active' => Testimonial::where('is_active', true)->count(),
+                    'title' => 'সন্তুষ্টি মন্তব্য'
+               ],
+               'opportunities' => [
+                    'total' => Opportunity::count(),
+                    'title' => 'সুযোগ'
+               ],
+               'chairmen' => [
+                    'total' => Chairman::count(),
+                    'title' => 'চেয়ারম্যান'
+               ],
+               'founders' => [
+                    'total' => Founder::count(),
+                    'title' => 'প্রতিষ্ঠাতা'
+               ],
+               'histories' => [
+                    'total' => History::count(),
+                    'title' => 'ইতিহাস'
+               ],
+               'mission_visions' => [
+                    'total' => MissionAndVission::count(),
+                    'title' => 'মিশন ও ভিশন'
+               ],
+               'heroes' => [
+                    'total' => Hero::count(),
+                    'title' => 'হিরো'
+               ],
+               'hero_sections' => [
+                    'total' => HeroSection::count(),
+                    'title' => 'হিরো সেকশন'
+               ],
+               'contact_info' => [
+                    'total' => Contactinfo::count(),
+                    'title' => 'যোগাযোগ তথ্য'
+               ],
+               'social_media' => [
+                    'total' => SocialMedia::count(),
+                    'active' => SocialMedia::where('is_active', true)->count(),
+                    'title' => 'সোশ্যাল মিডিয়া'
+               ],
+               'footer_settings' => [
+                    'total' => FooterSetting::count(),
+                    'active' => FooterSetting::where('is_active', true)->count(),
+                    'title' => 'ফুটার সেটিংস'
+               ],
+          ];
 
+
+          // Get latest bookings
+          $latestBookings = Booking::latest()->take(5)->get();
+
+          // Get plot distribution by category
+          $plotCategories = Plot::where('is_active', true)
+               ->groupBy('category')
+               ->selectRaw('category, count(*) as count')
+               ->get();
+
+          return view('admin.layouts.dashboard', compact('stats', 'latestBookings', 'plotCategories'));
+     }
      public function booking()
      {
           return view('admin.booking.booking');

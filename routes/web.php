@@ -17,7 +17,9 @@ use App\Http\Controllers\Backend\PricingController;
 use App\Http\Controllers\Backend\ContactInfoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Admin\PlotController;
+use App\Http\Controllers\AmaderSomporkeController;
 use App\Http\Controllers\ProfileController;
+
 
 Route::get('/', [HomeController::class, 'landingPage'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutPage'])->name('about');
@@ -124,4 +126,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/edit/{id}', [AssignRoleController::class, 'edit'])->name('users.edit')->middleware('permission:Edit AssignRole');
     Route::put('/users/update/{id}', [AssignRoleController::class, 'update'])->name('users.update')->middleware('permission:Edit AssignRole');
     Route::get('/users/delete/{id}', [AssignRoleController::class, 'destroy'])->name('users.delete')->middleware('permission:Delete AssignRole');
+
+
+
+    //For Hero Section
+    Route::get('/amader-somporke/hero', [AmaderSomporkeController::class, 'hero'])->name('amader-somporke.hero')->middleware('permission:View About Hero');
+    Route::post('/amader-somporke/hero', [AmaderSomporkeController::class, 'updateHero'])->name('amader-somporke.hero.update')->middleware('permission:View About Hero');;
+
+
+    //For History Section
+
+    Route::get('/admin/amader-somporke/history', [AmaderSomporkeController::class, 'history'])->name('amader-somporke.history')->middleware('permission:View About History');
+    Route::post('/admin/amader-somporke/history/update', [AmaderSomporkeController::class, 'updateHistory'])->name('amader-somporke.history.update')->middleware('permission:View About History');
+
+    //For Mission and Vission
+
+    Route::get('/admin/amader-somporke/mission', [AmaderSomporkeController::class, 'missionAndVission'])->name('amader-somporke.missionAndVission')->middleware('permission:View About Mission & Vision');
+    Route::post('/admin/amader-somporke/mission/update', [AmaderSomporkeController::class, 'updateMissionAndVission'])->name('amader-somporke.mission-vision.update')->middleware('permission:View About Mission & Vision');
+
+    //For Founder
+
+    Route::get('/admin/amader-somporke/founder', [AmaderSomporkeController::class, 'founder'])->name('amader-somporke.founder')->middleware('permission:View About Founder');
+    Route::post('/admin/amader-somporke/founder/update', [AmaderSomporkeController::class, 'updateFounder'])->name('amader-somporke.founder.update')->middleware('permission:View About Founder');
+
+    //For Chairman
+
+    Route::get('/admin/amader-somporke/chairman', [AmaderSomporkeController::class, 'chairman'])->name('amader-somporke.chairman')->middleware('permission:View About Chairman');
+    Route::post('/admin/amader-somporke/chairman/update', [AmaderSomporkeController::class, 'updateChairman'])->name('amader-somporke.chairman.update')->middleware('permission:View About Chairman');
 });

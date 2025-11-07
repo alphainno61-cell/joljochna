@@ -213,6 +213,38 @@ class PermissionSeeder extends Seeder
                 'name' => 'Setting',
                 'groupby' => 'Setting'
             ],
+
+
+            // About Hero
+            [
+                'name' => 'View About Hero',
+                'groupby' => 'About Hero'
+            ],
+
+            // About History
+            [
+                'name' => 'View About History',
+                'groupby' => 'About History'
+            ],
+
+            // About Mission & Vision
+            [
+                'name' => 'View About Mission & Vision',
+                'groupby' => 'About Mission & Vision'
+            ],
+
+            // About Founder
+            [
+                'name' => 'View About Founder',
+                'groupby' => 'About Founder'
+            ],
+
+            // About Chairman
+            [
+                'name' => 'View About Chairman',
+                'groupby' => 'About Chairman'
+            ],
+
         ];
 
         // Create permissions
