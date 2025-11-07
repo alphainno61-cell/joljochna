@@ -99,7 +99,7 @@ class AmaderSomporkeController extends Controller
                 'description1' => 'required|string|max:2000',
                 'title2' => 'required|string|max:255',
                 'description2' => 'required|string|max:2000',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
 
             // Handle image upload
@@ -140,7 +140,7 @@ class AmaderSomporkeController extends Controller
                 'position' => 'required|string|max:255',
                 'description1' => 'required|string|max:2000',
                 'description2' => 'required|string|max:2000',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
 
             // Handle image upload
@@ -183,7 +183,7 @@ class AmaderSomporkeController extends Controller
                 'description1' => 'required|string|max:2000',
                 'description2' => 'required|string|max:2000',
                 'description3' => 'required|string|max:2000',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
 
             // Handle image upload

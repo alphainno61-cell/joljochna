@@ -211,7 +211,7 @@
             <div class="slide-overlay">শান্তি নিবাস</div>
           </div>
           <div class="slide">
-            <img src="https://images.unsplash.com/photo-16005851543-be406161a56a0c?auto=format&fit=crop&w=1500&q=80" alt="Project 2">
+            <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1500&q=80" alt="Project 2">
             <div class="slide-overlay">সবুজ ভিটা</div>
           </div>
           <div class="slide">
@@ -223,7 +223,7 @@
             <div class="slide-overlay">নির্মাণ প্লাজা</div>
           </div>
           <div class="slide">
-            <img src="https://images.unsplash.com/photo-1560185127-6ed189bf04bb?auto=format&fit=crop&w=1500&q=80" alt="Project 5">
+            <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1500&q=80" alt="Project 5">
             <div class="slide-overlay">গোল্ডেন হেভেন</div>
           </div>
         </div>

@@ -170,7 +170,7 @@
                     <img src="{{ $footerSetting->project_roadmap_image_url }}" class="img-fluid object-fit-fill"
                         alt="Project Map">
                 @else
-                    <img src="assets/images/realstate3.PNG" class="img-fluid object-fit-fill" alt="Project Map">
+                    <img src="{{ asset('assets/images/realstate3.PNG') }}" class="img-fluid object-fit-fill" alt="Project Map">
                 @endif
 
             </div>
