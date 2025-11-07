@@ -28,21 +28,21 @@
             @canany(['View Permission', 'View Role', 'View AssignRole'])
                 <li class="nav-item">
                     <a href="#accessControl"
-                        class="nav-link {{ request()->routeIs(['permissions', 'roles', 'users']) ? 'active' : '' }}"
+                        class="nav-link {{ request()->routeIs(['permissions', 'roles', 'users', 'permissions.create', 'permissions.edit', 'roles.create', 'roles.edit', 'users.create', 'users.edit']) ? 'active' : '' }}"
                         data-bs-toggle="collapse" role="button"
-                        aria-expanded="{{ request()->routeIs(['permissions', 'roles', 'users']) ? 'true' : 'false' }}"
+                        aria-expanded="{{ request()->routeIs(['permissions', 'roles', 'users', 'permissions.create', 'permissions.edit', 'roles.create', 'roles.edit', 'users.create', 'users.edit']) ? 'true' : 'false' }}"
                         aria-controls="accessControl">
                         <i class="bi bi-shield-lock"></i>
                         <span>এক্সেস কন্ট্রোল</span>
                         <i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <div class="collapse {{ request()->routeIs(['permissions', 'roles', 'users']) ? 'show' : '' }}"
+                    <div class="collapse {{ request()->routeIs(['permissions', 'roles', 'users', 'permissions.create', 'permissions.edit', 'roles.create', 'roles.edit', 'users.create', 'users.edit']) ? 'show' : '' }}"
                         id="accessControl">
                         <ul class="nav flex-column ms-3">
                             @can('View Permission')
                                 <li class="nav-item">
                                     <a href="{{ route('permissions') }}"
-                                        class="nav-link {{ request()->routeIs('permissions') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['permissions', 'permissions.create', 'permissions.edit']) ? 'active' : '' }}">
                                         <i class="bi bi-key"></i>
                                         <span>পারমিশন</span>
                                     </a>
@@ -52,7 +52,7 @@
                             @can('View Role')
                                 <li class="nav-item">
                                     <a href="{{ route('roles') }}"
-                                        class="nav-link {{ request()->routeIs('roles') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['roles', 'roles.create', 'roles.edit']) ? 'active' : '' }}">
                                         <i class="bi bi-person-badge"></i>
                                         <span>রোলস</span>
                                     </a>
@@ -62,7 +62,7 @@
                             @can('View AssignRole')
                                 <li class="nav-item">
                                     <a href="{{ route('users') }}"
-                                        class="nav-link {{ request()->routeIs('users') ? 'active' : '' }}">
+                                        class="nav-link {{ request()->routeIs(['users', 'users.create', 'users.edit']) ? 'active' : '' }}">
                                         <i class="bi bi-people"></i>
                                         <span>এডমিন ইউজার</span>
                                     </a>
@@ -176,7 +176,7 @@
             @can('View Pricing Section')
                 <li class="nav-item">
                     <a href="{{ route('admin.pricing.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.pricing.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.pricing.index', 'admin.pricing.create', 'admin.pricing.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>প্রাইসিং</span>
                     </a>
@@ -187,7 +187,7 @@
             @can('View Testimonial Section')
                 <li class="nav-item">
                     <a href="{{ route('admin.testimonials.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.testimonials.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.testimonials.index', 'admin.testimonials.create', 'admin.testimonials.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>মন্তব্য সমূহ</span>
                     </a>
@@ -197,7 +197,7 @@
             @can('View SocialMedia Section')
                 <li class="nav-item">
                     <a href="{{ route('admin.socialmedias.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.socialmedias.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.socialmedias.index', 'admin.socialmedias.create', 'admin.socialmedias.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>সোস্যাল মিডিয়া</span>
                     </a>
@@ -208,7 +208,7 @@
             @can('View Project Section')
                 <li class="nav-item">
                     <a href="{{ route('admin.projects.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.projects.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.projects.index', 'admin.projects.create', 'admin.projects.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>প্রজেক্টস</span>
                     </a>
@@ -217,10 +217,10 @@
 
 
 
-            @can('View Contact Section')
+            @can('Contact Section')
                 <li class="nav-item">
                     <a href="{{ route('admin.contact-info.edit') }}"
-                        class="nav-link {{ request()->routeIs('admin.contact-info.edit') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.contact-info.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>যোগাযোগের তথ্য</span>
                     </a>
@@ -231,7 +231,7 @@
             @can('View Booking')
                 <li class="nav-item">
                     <a href="{{ route('admin.bookings.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.bookings.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.bookings.index', 'admin.bookings.show']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>বুকিং</span>
                     </a>
@@ -241,7 +241,7 @@
             @can('View Plot')
                 <li class="nav-item">
                     <a href="{{ route('admin.plots.index') }}"
-                        class="nav-link {{ request()->routeIs('admin.plots.index') ? 'active' : '' }}">
+                        class="nav-link {{ request()->routeIs(['admin.plots.index', 'admin.plots.create', 'admin.plots.edit']) ? 'active' : '' }}">
                         <i class="bi bi-key"></i>
                         <span>প্লটস</span>
                     </a>

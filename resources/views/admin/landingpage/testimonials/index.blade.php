@@ -19,9 +19,12 @@
                             <i class="fas fa-comments me-2"></i>
                             বিনিয়োগকারী মন্তব্য ব্যবস্থাপনা
                         </h4>
-                        <a href="{{ route('admin.testimonials.create') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-plus me-1"></i> নতুন মন্তব্য
-                        </a>
+
+                        @can('Create Testimonial Section')
+                            <a href="{{ route('admin.testimonials.create') }}" class="btn btn-light btn-sm">
+                                <i class="fas fa-plus me-1"></i> নতুন মন্তব্য
+                            </a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         @if ($testimonials->count() > 0)
@@ -64,20 +67,26 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.testimonials.edit', $testimonial->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form
-                                                        action="{{ route('admin.testimonials.destroy', $testimonial->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই মন্তব্যটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit Testimonial Section')
+                                                        <a href="{{ route('admin.testimonials.edit', $testimonial->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete Testimonial Section')
+                                                        <form
+                                                            action="{{ route('admin.testimonials.destroy', $testimonial->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই মন্তব্যটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

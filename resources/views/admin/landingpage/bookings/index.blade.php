@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="card shadow">
-                    <div class="card-header bg-info text-white">
+                    <div class="card-header bg-success text-white">
                         <h4 class="mb-0">
                             <i class="fas fa-calendar-check me-2"></i>
                             বুকিং ব্যবস্থাপনা
@@ -130,19 +130,25 @@
                                                     </span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.bookings.show', $booking->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <form action="{{ route('admin.bookings.destroy', $booking->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই বুকিংটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit Booking')
+                                                        <a href="{{ route('admin.bookings.show', $booking->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete Booking')
+                                                        <form action="{{ route('admin.bookings.destroy', $booking->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই বুকিংটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

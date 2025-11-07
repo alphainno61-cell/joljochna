@@ -47,40 +47,25 @@ Route::middleware('auth')->group(function () {
         ->name('updateorcreate')
         ->middleware('permission:Hero Section');
 
-    Route::resource('opportunity', OpportunityController::class)->middleware([
-        'permission:View Opportunity Section',
-        'permission:Create Opportunity Section',
-        'permission:Edit Opportunity Section',
-        'permission:Delete Opportunity Section'
-    ]);
+    Route::resource('opportunity', OpportunityController::class)->middleware(
+        'permission:View Opportunity Section|Create Opportunity Section|Edit Opportunity Section|Delete Opportunity Section'
+    );
 
     Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('pricing', PricingController::class)->middleware([
-            'permission:View Pricing Section',
-            'permission:Create Pricing Section',
-            'permission:Edit Pricing Section',
-            'permission:Delete Pricing Section'
+            'permission:View Pricing Section|Create Pricing Section|Edit Pricing Section|Delete Pricing Section'
         ]);
         Route::resource('testimonials', TestimonialController::class)->middleware([
-            'permission:View Testimonial Section',
-            'permission:Create Testimonial Section',
-            'permission:Edit Testimonial Section',
-            'permission:Delete Testimonial Section'
+            'permission:View Testimonial Section|Create Testimonial Section|Edit Testimonial Section|Delete Testimonial Section'
         ]);
 
         Route::resource('socialmedias', SocialMediaController::class)->middleware([
-            'permission:View SocialMedia Section',
-            'permission:Create SocialMedia Section',
-            'permission:Edit SocialMedia Section',
-            'permission:Delete SocialMedia Section'
+            'permission:View SocialMedia Section|Create SocialMedia Section|Edit SocialMedia Section|Delete SocialMedia Section'
         ]);
 
         Route::resource('projects', ProjectController::class)->middleware([
-            'permission:View Projects Section',
-            'permission:Create Projects Section',
-            'permission:Edit Projects Section',
-            'permission:Delete Projects Section'
+            'permission:View Projects Section|Create Projects Section|Edit Projects Section|Delete Projects Section'
         ]);
 
         Route::get('/contact-info', [ContactInfoController::class, 'edit'])->name('contact-info.edit')
@@ -89,15 +74,11 @@ Route::middleware('auth')->group(function () {
             ->middleware('permission:Contact Section');
 
         Route::resource('plots', PlotController::class)->middleware([
-            'permission:View Plot',
-            'permission:Create Plot',
-            'permission:Edit Plot',
-            'permission:Delete Plot'
+            'permission:View Plot|Create Plot|Edit Plot|Delete Plot'
+
         ]);
         Route::resource('bookings', BackendBookingController::class)->except(['create', 'store', 'edit'])->middleware([
-            'permission:View Booking',
-            'permission:Edit Booking',
-            'permission:Delete Booking'
+            'permission:View Booking|Edit Booking|Delete Booking'
         ]);
 
         Route::put('bookings/{booking}/status', [BackendBookingController::class, 'updateStatus'])->name('bookings.update-status')

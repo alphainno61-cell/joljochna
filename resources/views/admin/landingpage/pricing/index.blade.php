@@ -29,9 +29,11 @@
                             <i class="fas fa-money-bill-wave me-2"></i>
                             মূল্য তালিকা ব্যবস্থাপনা
                         </h4>
-                        <a href="{{ route('admin.pricing.create') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-plus me-1"></i> নতুন প্যাকেজ
-                        </a>
+                        @can('Create Pricing Section')
+                            <a href="{{ route('admin.pricing.create') }}" class="btn btn-light btn-sm">
+                                <i class="fas fa-plus me-1"></i> নতুন প্যাকেজ
+                            </a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         @if ($pricings->count() > 0)
@@ -77,19 +79,25 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.pricing.edit', $pricing->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form action="{{ route('admin.pricing.destroy', $pricing->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই প্যাকেজটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit Pricing Section')
+                                                        <a href="{{ route('admin.pricing.edit', $pricing->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete Pricing Section')
+                                                        <form action="{{ route('admin.pricing.destroy', $pricing->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই প্যাকেজটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

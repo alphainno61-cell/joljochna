@@ -19,9 +19,12 @@
                             <i class="fas fa-building me-2"></i>
                             প্রকল্প ব্যবস্থাপনা
                         </h4>
-                        <a href="{{ route('admin.projects.create') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-plus me-1"></i> নতুন প্রকল্প
-                        </a>
+
+                        @can('Create Projects Section')
+                            <a href="{{ route('admin.projects.create') }}" class="btn btn-light btn-sm">
+                                <i class="fas fa-plus me-1"></i> নতুন প্রকল্প
+                            </a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         @if ($projects->count() > 0)
@@ -72,19 +75,25 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.projects.edit', $project->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form action="{{ route('admin.projects.destroy', $project->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই প্রকল্পটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit Projects Section')
+                                                        <a href="{{ route('admin.projects.edit', $project->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete Projects Section')
+                                                        <form action="{{ route('admin.projects.destroy', $project->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই প্রকল্পটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

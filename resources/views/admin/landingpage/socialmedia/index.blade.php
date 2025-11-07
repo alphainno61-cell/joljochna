@@ -19,9 +19,13 @@
                             <i class="fas fa-images me-2"></i>
                             Carousel ব্যবস্থাপনা
                         </h4>
-                        <a href="{{ route('admin.socialmedias.create') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-plus me-1"></i> নতুন আইটেম
-                        </a>
+
+                        @can('Create SocialMedia Section')
+                            <a href="{{ route('admin.socialmedias.create') }}" class="btn btn-light btn-sm">
+                                <i class="fas fa-plus me-1"></i> নতুন আইটেম
+                            </a>
+                        @endcan
+
                     </div>
                     <div class="card-body">
                         @if ($socialMediaLinks->count() > 0)
@@ -77,20 +81,26 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('admin.socialmedias.edit', $socialmedia->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form
-                                                        action="{{ route('admin.socialmedias.destroy', $socialmedia->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই আইটেমটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit SocialMedia Section')
+                                                        <a href="{{ route('admin.socialmedias.edit', $socialmedia->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete SocialMedia Section')
+                                                        <form
+                                                            action="{{ route('admin.socialmedias.destroy', $socialmedia->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই আইটেমটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

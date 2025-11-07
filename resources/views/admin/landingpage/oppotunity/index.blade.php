@@ -29,9 +29,12 @@
                             <i class="fas fa-list me-2"></i>
                             সুবিধাসমূহ তালিকা
                         </h4>
-                        <a href="{{ route('opportunity.create') }}" class="btn btn-light btn-sm">
-                            <i class="fas fa-plus me-1"></i> নতুন সুবিধাসমূহ
-                        </a>
+
+                        @can('Create Opportunity Section')
+                            <a href="{{ route('opportunity.create') }}" class="btn btn-light btn-sm">
+                                <i class="fas fa-plus me-1"></i> নতুন সুবিধাসমূহ
+                            </a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         @if ($opportunity->count() > 0)
@@ -60,19 +63,25 @@
 
 
                                                 <td class="text-end">
-                                                    <a href="{{ route('opportunity.edit', $item->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    <form action="{{ route('opportunity.destroy', $item->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        onsubmit="return confirm('আপনি কি নিশ্চিত এই ফিচারটি মুছে ফেলতে চান?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
+
+                                                    @can('Edit Opportunity Section')
+                                                        <a href="{{ route('opportunity.edit', $item->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+
+                                                    @can('Delete Opportunity Section')
+                                                        <form action="{{ route('opportunity.destroy', $item->id) }}"
+                                                            method="POST" class="d-inline"
+                                                            onsubmit="return confirm('আপনি কি নিশ্চিত এই ফিচারটি মুছে ফেলতে চান?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
